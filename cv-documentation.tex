@@ -1,0 +1,108 @@
+\documentclass{article}
+\title{The \texttt{cv} class and \texttt{cvsidebar} package}
+\author{Erik Weitenberg}
+
+\setlength\parskip{1em}
+\setlength\parindent{0pt}
+\begin{document}
+\maketitle
+
+\section{Introduction}
+The \texttt{cv} class allows one to typeset a simple curriculum vitae (cv).
+An additional package \texttt{cvsidebar} is provided for a more modern design with a side-bar on the first page.
+
+\section{The cv class}
+\subsection{Class options}
+The class supports some options, detailed below.
+\begin{itemize}
+	\item \texttt{headingcolor=}\textit{color} \\
+		Change the color of the headings in the document, using the \texttt{xcolor} package.
+		You can also use a custom color, provided you define it in the preamble.
+		The default is black.
+	\item \texttt{selection=}\textit{string} \\
+		An arbitrary string, printed at the bottom of each page.
+		I use this to identify old printed versions of the cv, since I typically create a custom version of the document for each prospective employer.
+		By printing the version on the document, I can later find it back easily if I want to reuse it.
+		The default \texttt{all} suppresses the footer.
+	\item \texttt{scale=}\textit{float} \\
+		A scaling factor, 1 by default, that allows you to increase or decrease the amount of whitespace between lines in the tables.
+\end{itemize}
+
+\subsection{New commands}
+There are some new commands specific to the creation of a cv.
+The following should be used in the preamble.
+All of them are optional unless otherwise noted.
+\begin{itemize}
+	\item \texttt{\textbackslash{}author\{}\textit{name}\texttt{\}} \\
+		The same command as in the \texttt{article} class. Mandatory.
+	\item \texttt{\textbackslash{}titlebefore\{}\textit{title}\texttt{\}} \\
+		A title, like Dr., to be printed before your name.
+	\item \texttt{\textbackslash{}titleafter\{}\textit{title}\texttt{\}} \\
+		A title, like Msc, to be printed after your name.
+	\item \texttt{\textbackslash{}dateofbirth\{}\textit{text}\texttt{\}} \\
+	      \texttt{\textbackslash{}address\{}\textit{text}\texttt{\}} \\
+	      \texttt{\textbackslash{}phonenumber\{}\textit{text}\texttt{\}} \\
+	      \texttt{\textbackslash{}emailaddress\{}\textit{text}\texttt{\}[}\textit{text}\texttt{]} \\
+		Several bits of personal data usually present on a cv.
+		If you supply them, they will be printed below your name.
+		The address is turned into a link in the pdf; if you insert markup code, you should provide the address in plain text in the optional argument to get a working link.
+	\item \texttt{\textbackslash{}photofile\{}\textit{filename}\texttt{\}} \\
+		If you supply a photo, it will be placed next to your name.
+\end{itemize}
+
+The activities you wish to include on your cv can be given using specialized commands, to align them neatly in a table.
+You can start such a table using the \texttt{cvtable} environment, which accepts an optional argument to give it a heading. For example,
+\begin{verbatim}
+\begin{cvtable}[Education]
+  ...
+\end{cvtable}
+\end{verbatim}
+Within this environment, you can list your activities and publications using these commands.
+\begin{itemize}
+	\item \texttt{\textbackslash{}activity*\{}\textit{date}\texttt{\}*\{}\textit{job title}\texttt{\}[}\textit{employer}\texttt{]} \\
+		Inserts an activity, like education or employment.
+		The first star, if present, causes this row to take less space, which looks nice if you will not include an explanation below it.
+		The second star, if present, causes the \textit{job title} not to be bolded, which I find useful if I am not including many explanations.
+	\item \texttt{\textbackslash{}explanation\{}\textit{text}\texttt{\}} \\
+		Explanatory text, typically inserted after an activity.
+	\item \texttt{\textbackslash{}publication\{}\textit{date}\texttt{\}\{}\textit{author}\texttt{\}\{}\textit{title}\texttt{\}\{}\textit{venue}\texttt{\}[}\textit{volume}\texttt{][}\textit{pages}\texttt{]} \\
+		Cites a publication. The last two arguments are optional, but you must use none or both.
+\end{itemize}
+
+To insert a page break inside a \texttt{cvtable}, use the \texttt{\textbackslash{}pagebreak} command.
+
+There is also a \texttt{cvshorttable} command, which is meant for skills and languages and prints its contents in two columns.
+Use \texttt{\textbackslash{}colbreak} inside it to go to the second column.
+
+\section{The cvsidebar package}
+\subsection{Package options}
+The package supports some options, detailed below.
+\begin{itemize}
+	\item \texttt{sidebarcolor=}\textit{color} \\
+		Change the color of the sidebar, using the \texttt{xcolor} package.
+		You can also use a custom color, provided you define it in the preamble.
+		The default is \texttt{Gray!30!white}.
+	\item \texttt{sidebarwidth=}\textit{length} \\
+		Width of the sidebar, 6 cm by default.
+\end{itemize}
+
+\subsection{New commands}
+There are some new commands specific to the creation of a cv.
+
+The sidebar is created using the sidebar environment, within which you can provide additional text to be printed in the sidebar.
+Typically, one would list languages or computer skills here.
+\begin{verbatim}
+\begin{sidebar}
+\begin{cvtable}[Languages]
+  \activity{English}*{Native}
+  \activity{Spanish}*{Good}
+\end{cvtable}
+\end{sidebar}
+\end{verbatim}
+The package provides the additional command \texttt{\textbackslash{}activityFlushRight}, which works exactly like \texttt{\textbackslash{}activity} but flushes the second argument right.
+This typically looks nice in the sidebar, especially if you use icons for the skills.
+
+\textbf{The margins of the first page are different to make space for the sidebar.
+For this reason, you must end the first page explicitly using the \texttt{\textbackslash{}pagebreak} command.}
+
+\end{document}
