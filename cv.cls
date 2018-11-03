@@ -143,19 +143,19 @@
 }
 \newcommand{\CV@dob}{}
 \newcommand{\dateofbirth}[1]{
-  \renewcommand{\CV@dob}{\faCalendar{} #1{ }}
+  \renewcommand{\CV@dob}{\makebox[3ex]{\faCalendar}#1{ }}
 }
 \newcommand{\CV@address}{}
 \newcommand{\address}[1]{
-  \renewcommand{\CV@address}{\faHome{} #1{ }}
+  \renewcommand{\CV@address}{\makebox[3ex]{\faHome}#1{ }}
 }
 \newcommand{\CV@phone}{}
 \newcommand{\phonenumber}[1]{
-  \renewcommand{\CV@phone}{\faPhone{} #1{ }}
+  \renewcommand{\CV@phone}{\makebox[3ex]{\faPhone}#1{ }}
 }
 \newcommand{\CV@mail}{}
 \NewDocumentCommand{\emailaddress}{m o}{
- \renewcommand{\CV@mail}{\faEnvelope{}~~\href{mailto:\IfValueTF{#2}{#2}{#1}}{#1}}
+ \renewcommand{\CV@mail}{\makebox[3ex]{\faEnvelope}\href{mailto:\IfValueTF{#2}{#2}{#1}}{#1}}
 }
 
 \newcommand{\titlebefore}[1]{
