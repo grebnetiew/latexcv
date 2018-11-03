@@ -46,8 +46,10 @@ All of them are optional unless otherwise noted.
 		Several bits of personal data usually present on a cv.
 		If you supply them, they will be printed below your name.
 		The address is turned into a link in the pdf; if you insert markup code, you should provide the address in plain text in the optional argument to get a working link.
-	\item \texttt{\textbackslash{}photofile\{}\textit{filename}\texttt{\}} \\
+	\item \texttt{\textbackslash{}photofile[}\textit{width}\texttt{]\{}\textit{filename}\texttt{\}} \\
 		If you supply a photo, it will be placed next to your name.
+		It is cropped to a circle.
+		If you would like to enlarge the photo or reduce it, you can supply a width in the optional argument.
 \end{itemize}
 
 The activities you wish to include on your cv can be given using specialized commands, to align them neatly in a table.
