@@ -1,0 +1,86 @@
+\documentclass[11pt,a4paper]{../cv}
+% options: any from the article class, and additionally
+% headingcolor (default: Black)
+% selection (default: all)
+%   a custom label printed in the footer, so you can later distinguish the printed cv
+%   if you run into it. I usually use the company name, or 'academia' or somesuch.
+%   the default value 'all' causes nothing to be printed in the footer.
+% scale (default: 1)
+%   scale factor. controls space between lines. <1 for cozy, >1 for comfortable.
+
+\author{Laura Jacks}
+%\titlebefore{Dr.}
+\titleafter{PhD}
+
+% Leave out any of these
+\dateofbirth{8 June 1988}
+\address{Cambridge, UK}
+\phonenumber{123 456 789}
+\emailaddress{laura.jacks@example.com}
+
+\photofile{example-photo.jpg}
+
+\usepackage[english]{babel}
+
+\begin{document}
+
+% The activity command takes five parameters, detailed below.
+% \activity*{2012}*{Coffee Drinker}[Acme]
+% 1. Star. If present, the row is condensed (less high)
+% 2. Date or timespan.
+% 3. Star. If present, the job title is not bolded.
+% 4. Job or activity title.
+% 5. Employer or venue (optional).
+\begin{cvtable}[Education]
+\activity{2014 -- 2018}{Graduate student}[Acme University]
+\explanation{PhD degree in chemistry.\newline
+Research focused on coyote-based rocketry, with a side project in tunnel paintings on cliffsides.}
+\activity{2012 -- 2013}{Chemistry, Master}[Acme University]
+\explanation{Explanation, blah blah.}
+\activity*{2005 -- 2010}{Chemistry, Bachelor}[Acme University]
+\end{cvtable}
+
+\begin{cvtable}[Work experience]
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\end{cvtable}
+
+% The short table splits over two columns, and allows for languages and other short-form skills
+\begin{cvshorttable}[Skills]
+\activity{English} *{\faCircle \faCircle \faCircle \faCircle \faCircle}
+\activity{German}  *{\faCircle \faCircle \faCircle \faCircle \faCircleO}
+\activity{Spanish} *{\faCircle \faCircle \faCircleO\faCircleO\faCircleO}
+\colbreak
+\activity{Office}  *{\faCircle \faCircle \faCircle \faCircle \faCircle}
+\activity{Chemdraw}*{\faCircle \faCircle \faCircle \faCircle \faCircleO}
+\activity{Linux}   *{\faCircle \faCircle \faCircle \faCircle \faCircleO}
+\end{cvshorttable}
+
+\pagebreak % The pagebreak command can also be given inside a table environment
+
+% The publication command takes six parameters, detailed below.
+% \publication{2012}{Mary Doe}{Prevalence of sheep near power lines}{Acme Journal}[45][12--34]
+% 1. Date (usually year)
+% 2. Author(s)
+% 3. Title
+% 4. Venue
+% 5. Journal issue (optional)
+% 6. Journal pages (mandatory if 5 is given)
+\begin{cvtable}[Publications]
+\publication{2017}{L.~Jacks, W.~E.~Coyote}
+                  {Cliffside painting: a review}
+                  {23rd Acme conference}
+\publication{2016}{L.~Jacks, W.~E.~Coyote}
+                  {Towards safe coyote-based rocketry}
+                  {Acme Journal}[23][223--251]
+\end{cvtable}
+
+\end{document}

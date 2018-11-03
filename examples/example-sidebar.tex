@@ -1,0 +1,116 @@
+\documentclass[12pt,a4paper]{../cv}
+% options: any from the article class, and additionally
+% headingcolor (default: Black)
+% selection (default: all)
+%   a custom label printed in the footer, so you can later distinguish the printed cv
+%   if you run into it. I usually use the company name, or 'academia' or somesuch.
+%   the default value 'all' causes nothing to be printed in the footer.
+% scale (default: 1)
+%   scale factor. controls space between lines. <1 for cozy, >1 for comfortable.
+
+\usepackage{../cvsidebar}
+% options:
+% sidebarcolor (default: Gray!30!white)
+% sidebarwidth (default: 6cm)
+
+\author{Laura Jacks}
+%\titlebefore{Dr.}
+\titleafter{PhD}
+
+% Leave out any of these
+\dateofbirth{8 June 1988}
+\address{Cambridge, UK}
+\phonenumber{123 456 789}
+% In the narrow sidebar, you may want to break your email in two.
+% The optional argument for emailaddress is provided, to make sure the mailto: link
+% in the pdf does not contain the line break commands.
+\emailaddress{laura.jacks\\\phantom{.}\hfill @example.com}[laura.jacks@example.com]
+
+\photofile{example-photo.jpg}
+
+\usepackage[english]{babel}
+
+\begin{document}
+% The package cvsidebar provides the sidebar environment, in which you can put
+% material like skill meters.
+% Because it looks nicer, you can use activityFlushRight, which works exactly like the normal
+% activity except its contents are flushed to the right margin.
+\begin{sidebar}
+\begin{cvtable}[Languages]
+\activityFlushRight{English} *{\faCircle \faCircle \faCircle \faCircle \faCircle}
+\activityFlushRight{German}  *{\faCircle \faCircle \faCircle \faCircle \faCircleO}
+\activityFlushRight{Spanish} *{\faCircle \faCircle \faCircleO\faCircleO\faCircleO}
+\end{cvtable}
+\begin{cvtable}[Skills]
+\activityFlushRight{Office}  *{\faCircle \faCircle \faCircle \faCircle \faCircle}
+\activityFlushRight{Chemdraw}*{\faCircle \faCircle \faCircle \faCircle \faCircleO}
+\activityFlushRight{Linux}   *{\faCircle \faCircle \faCircle \faCircle \faCircleO}
+\end{cvtable}
+\end{sidebar}
+
+Maybe some nice text to introduce yourself.
+
+% The activity command takes five parameters, detailed below.
+% \activity*{2012}*{Coffee Drinker}[Acme]
+% 1. Star. If present, the row is condensed (less high)
+% 2. Date or timespan.
+% 3. Star. If present, the job title is not bolded.
+% 4. Job or activity title.
+% 5. Employer or venue (optional).
+\begin{cvtable}[Education]
+\activity{2014 -- 2018}{Graduate student}[Acme University]
+\explanation{PhD degree in chemistry.\newline
+Research focused on coyote-based rocketry, with a side project in tunnel paintings on cliffsides.}
+\activity{2012 -- 2013}{Chemistry, Master}[Acme University]
+\explanation{Explanation, blah blah.}
+\activity*{2005 -- 2010}{Chemistry, Bachelor}[Acme University]
+\end{cvtable}
+
+\begin{cvtable}[Work experience]
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Side job}[Acme Employer]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\end{cvtable}
+
+\begin{cvtable}[Committee work]
+\activity{2010 -- 2017}{Nice committee}[Sports club]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Nice committee}[Sports club]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Nice committee}[Sports club]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\pagebreak % The pagebreak command can also be given inside a table environment
+           % Since it resets the page layout back to 'normal', it must be given!
+\activity{2010 -- 2017}{Nice committee}[Sports club]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\activity{2010 -- 2017}{Nice committee}[Sports club]
+\explanation{Explanation on responsibilities and projects. Consistent great results. Blah blah.}
+\end{cvtable}
+
+
+
+% The publication command takes six parameters, detailed below.
+% \publication{2012}{Mary Doe}{Prevalence of sheep near power lines}{Acme Journal}[45][12--34]
+% 1. Date (usually year)
+% 2. Author(s)
+% 3. Title
+% 4. Venue
+% 5. Journal issue (optional)
+% 6. Journal pages (mandatory if 5 is given)
+\begin{cvtable}[Publications]
+\publication{2017}{L.~Jacks, W.~E.~Coyote}
+                  {Cliffside painting: a review}
+                  {23rd Acme conference}
+\publication{2016}{L.~Jacks, W.~E.~Coyote}
+                  {Towards safe coyote-based rocketry}
+                  {Acme Journal}[23][223--251]
+\end{cvtable}
+
+\end{document}

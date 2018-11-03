@@ -1,0 +1,92 @@
+\NeedsTeXFormat{LaTeX2e} 
+\ProvidesPackage{cvsidebar}[2018/11/01 v0.1 Sidebar for Curriculum Vitae]
+
+\RequirePackage{kvoptions}
+
+\SetupKeyvalOptions{family=CV,prefix=CV@}
+% The sidebarcolor sets the color of the sidebar
+\DeclareStringOption[Gray!30!white]{sidebarcolor}
+% The option sidebarwidth allows you to define the width of the sidebar.
+% The default is 5 cm.
+\DeclareStringOption[6cm]{sidebarwidth}
+\ProcessKeyvalOptions*
+
+% Set up the geometry
+\RequirePackage{etoolbox}
+\RequirePackage{geometry}
+\savegeometry{cv-secondpageonwards}
+\newlength\CV@leftmargin
+\setlength\CV@leftmargin{\CV@sidebarwidth}
+\addtolength\CV@leftmargin{1.5cm}
+\newgeometry{left=\CV@leftmargin, top=2cm, bottom=2cm, right=2cm}
+%The page break command should reset these
+\apptocmd{\pagebreak}{\CV@rememberspace{0pt}\newgeometry{left=3cm, top=3cm, bottom=3cm, right=3cm}}{}{}
+\let\CV@normalpagebreak\pagebreak
+\renewcommand\pagebreak{\CV@normalpagebreak}
+\newcommand\CV@intablepagebreak{\end{cvtable}\pagebreak\begin{cvtable}\relax}
+
+% Remove the page numbers
+\cfoot{}
+% To cope with the change in geometry, make fancyhdr recalculate the margins
+\AtBeginDocument{\fancyhfoffset[R]{0pt}}
+
+% A special activity command that looks good in the sidebar
+\RequirePackage{xparse}
+\NewDocumentCommand \activityFlushRight { s m s m o }{%
+  \CV@insertsavedspace%
+  {\small #2}\`% the date
+  \IfBooleanTF{#3}{#4}{\textbf{#4}}% the title, bold or not
+  \IfValueT{#5}{, \textsl{#5}}%
+  \IfBooleanTF{#1}{\CV@Toprule}{\CV@Doublerule}% the space after
+}
+
+% Now, we set up the left column with "quick info" that is the focus of this design
+\RequirePackage[absolute,overlay]{textpos} % for textblock
+\RequirePackage{calc}
+\newlength{\CV@topmargintotal}
+\setlength{\CV@topmargintotal}{\voffset+\topmargin+\headsep+\headheight+1in}
+\setlength{\photowidth}{.3\textwidth}
+\setlength{\CV@defaultfilewidth}{.35\textwidth}
+% See https://www.quora.com/How-do-you-set-margins-in-LaTeX for the method in the madness
+\newenvironment{sidebar}{
+  \begin{textblock*}{\CV@sidebarwidth - 2cm}(1cm,\CV@topmargintotal-1cm)
+    \ifthenelse{\not\isundefined{\CV@photofile}}{
+      \begin{center}
+      \begin{tikzpicture}
+      \node[circle,minimum width=1.05\photowidth,draw] {};
+      \node[circle,minimum width=\photowidth,path picture={
+                   \node at (path picture bounding box.center){
+                       \includegraphics[width=\photocirclewidth]{\CV@photofile}
+                   };
+               }]{};
+      \end{tikzpicture}
+      \end{center}
+    }{\vspace{0.7cm}}%
+    { \small \CV@dob \CV@address \CV@phone \CV@mail }
+  \end{textblock*}
+  \begin{textblock*}{\CV@sidebarwidth - 2cm}[0,1](1cm,\CV@topmargintotal+\textheight)
+  }{
+    \CV@rememberspace{0pt}%
+    \end{textblock*}%
+  }
+
+  \renewcommand\CV@maketitle{{
+    \hspace{-0.6mm}\Huge{}%
+    \ifthenelse{\not\isundefined{\CV@titlepre}}{\textcolor{Gray}{\CV@titlepre} }{}%
+    \@author\ifthenelse{\not\isundefined{\CV@titlepost}}{\textcolor{Gray}{, \CV@titlepost}}{} \\
+  }
+  \tikz[remember picture,overlay]{
+    \node [rectangle, fill=\CV@sidebarcolor, anchor=north west, minimum width=\CV@sidebarwidth, minimum height=\paperheight] at (current page.north west){};
+  }
+  \vfill}
+
+  \renewcommand\CV@insertphoto{}
+
+% The personal data needs linebreaks in the sidebar, so we insert them
+\newcommand\CV@appendnewlinestopersonaldata{%
+  \apptocmd{\CV@dob}{\\[1ex]}{}{}%
+  \apptocmd{\CV@address}{\\[1ex]}{}{}%
+  \apptocmd{\CV@phone}{\\[1ex]}{}{}%
+  \apptocmd{\CV@mail}{\\[1ex]}{}{}%
+}
+\AtBeginDocument{\CV@appendnewlinestopersonaldata}
