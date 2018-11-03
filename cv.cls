@@ -63,13 +63,7 @@
 \titlespacing*{\subsection}{0em}{0.5em plus 0.5em minus 0.2em}{-3ex}
 \titleformat{\section}[block]{\filcenter\addtolength{\titlewidth}{2pc}\bf\LARGE\color{\CV@headingcolor}\rm}{\thesection}{0em}{}
 \titlespacing*{\section}{0em}{1em}{2em}
-
-% Set up the fonts
-\RequirePackage[T1]{fontenc}
-\RequirePackage{iwona}
-\RequirePackage[scaled]{helvet}
 \renewcommand*\familydefault{\sfdefault}
-\renewcommand*\rmdefault{iwona}
 
 % Set up the tables
 \newlength\CV@rule
