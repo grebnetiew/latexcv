@@ -42,7 +42,14 @@
 \hypersetup{hidelinks,pdftitle=Curriculum vitae,pdfauthor=\@author}
 
 \RequirePackage{hanging}
+
+% FontAwesome has a bug when using xelatex unless you use fontspec and tell it to use the otf file.
+% But fontspec cancels your build if you use pdflatex. (Why doesn't it just disable itself? :( )
+
+\RequirePackage{ifxetex}
+\ifxetex\RequirePackage{fontspec}\defaultfontfeatures{Extension = .otf}\fi
 \RequirePackage{fontawesome} %for the icons
+
 \RequirePackage{calc}% For photo positioning
 
 \RequirePackage{fancyhdr}
