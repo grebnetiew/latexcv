@@ -27,9 +27,6 @@
 \ProcessKeyvalOptions*
 \LoadClass{article}
 
-\RequirePackage{ifxetex}
-\RequireXeTeX % because Fontawesome is not compatible with pdflatex
-
 \RequirePackage{xifthen}
 \RequirePackage{xparse}
 \RequirePackage{etoolbox}
@@ -45,7 +42,7 @@
 \hypersetup{hidelinks,pdftitle=Curriculum vitae,pdfauthor=\@author}
 
 \RequirePackage{hanging}
-\RequirePackage{fontawesome} \newfontfamily{\FA}{[FontAwesome.otf]}
+\RequirePackage{fontawesome} %for the icons
 \RequirePackage{calc}% For photo positioning
 
 \RequirePackage{fancyhdr}
