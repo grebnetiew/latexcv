@@ -17,6 +17,10 @@
 % Larger than 1 enlarges the document, smaller than 1 shrinks it (and is not recommended)
 \DeclareStringOption[1]{scale}
 
+% The option headingbars prints bars before the headings, as wide as the date column,
+% in the heading color.
+\DeclareBoolOption{headingbars}
+
 % The below command passes all unknown options (not processed above) to the article class
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{article}}
 
@@ -59,7 +63,12 @@
 
 %\microtypesetup{tracking=true,kerning=true,spacing=true}
 \RequirePackage{titlesec}
+
+\ifCV@headingbars
+\titleformat{\subsection}[block]{\bf\Large\color{\CV@headingcolor}\rm}{\thesubsection}{0em}{\raisebox{0.13cm}{\colorbox{\CV@headingcolor}{\hspace{0.75\CV@indent}}\hspace{0.4cm}}}
+\else
 \titleformat{\subsection}[block]{\bf\Large\color{\CV@headingcolor}\rm}{\thesubsection}{0em}{}
+\fi
 \titlespacing*{\subsection}{0em}{0.5em plus 0.5em minus 0.2em}{-3ex}
 \titleformat{\section}[block]{\filcenter\addtolength{\titlewidth}{2pc}\bf\LARGE\color{\CV@headingcolor}\rm}{\thesection}{0em}{}
 \titlespacing*{\section}{0em}{1em}{2em}
@@ -108,11 +117,14 @@
 
 \newcommand{\explanation}[1]{\CV@insertsavedspace\nopagebreak\>\begin{minipage}{0.8\linewidth}\small #1\end{minipage}\CV@Quadrule}
 
+\newlength\CV@indent
+\setlength\CV@indent{0.2\linewidth}
+
 \NewDocumentEnvironment{cvtable}{o}{%
   \IfValueT{#1}{\subsection{#1}}%
   \renewcommand\pagebreak{\CV@intablepagebreak}%
   \begin{tabbing}%
-  \hspace{0.2\linewidth}\=a\kill%
+  \hspace{\CV@indent}\=a\kill%
 }{%
   \CV@rememberspace{0pt}%
   \end{tabbing}%
@@ -123,7 +135,7 @@
   \vspace{0.2ex}
   \begin{multicols}{2}
   \begin{tabbing}
-  \hspace{0.4\linewidth}\=a\kill
+  \hspace{\CV@indent}\=a\kill
 }{%
   \end{tabbing}%
   \end{multicols}
